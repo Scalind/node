@@ -2,7 +2,7 @@
 
 ARGS="--poll-interval=12s --rpc.port=8560"
 
-if [[ (-n $SCALIND_L1_ETH_RPC) ]]; then
+if [[ -n $SCALIND_L1_ETH_RPC ]]; then
   ARGS="--l1-eth-rpc=$SCALIND_L1_ETH_RPC $ARGS"
 else
   echo "ERROR: Variable \"SCALIND_L1_ETH_RPC\" should be present"

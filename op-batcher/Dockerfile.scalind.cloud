@@ -7,4 +7,6 @@ FROM alpine:3.18
 COPY --from=builder /usr/local/bin/op-batcher /usr/local/bin/op-batcher
 COPY --from=builder /usr/local/entrypoints/op-batcher.sh /entrypoint.sh
 
+EXPOSE 8548
+
 ENTRYPOINT [ "/entrypoint.sh" ]

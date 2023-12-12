@@ -7,4 +7,6 @@ FROM alpine:3.18
 COPY --from=builder /usr/local/bin/op-proposer /usr/local/bin/op-proposer
 COPY --from=builder /usr/local/entrypoints/op-proposer.sh /entrypoint.sh
 
+EXPOSE 8560
+
 ENTRYPOINT [ "/entrypoint.sh" ]

@@ -16,7 +16,7 @@ else
   exit 1
 fi
 
-if [[ (-n $SCALIND_L1_ETH_RPC) ]]; then
+if [[ -n $SCALIND_L1_ETH_RPC ]]; then
   ARGS="--l1-eth-rpc=$SCALIND_L1_ETH_RPC $ARGS"
 else
   echo "ERROR: Variable \"SCALIND_L1_ETH_RPC\" should be present"
