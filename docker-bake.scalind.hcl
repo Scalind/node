@@ -68,7 +68,7 @@ target "op-batcher" {
 }
 
 target "op-proposer" {
-  dockerfile = "Dockerfile"
+  dockerfile = "Dockerfile.scalind.cloud"
   context = "./op-proposer"
   args = {
     OP_STACK_GO_BUILDER = "op-stack-go"
