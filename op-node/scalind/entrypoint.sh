@@ -50,7 +50,7 @@ else
   exit 1
 fi
 
-if [[ (-n $SCALIND_L1_URL) -a (-n $SCALIND_L1_KIND) ]]; then
+if [[ (-n $SCALIND_L1_URL) && (-n $SCALIND_L1_KIND) ]]; then
   ARGS="--l1=$SCALIND_L1_URL --l1.rpckind=$SCALIND_L1_KIND $ARGS"
 else
   echo "ERROR: Variables \"SCALIND_L1_URL\" and \"SCALIND_L1_KIND\" should be present"
