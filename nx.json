@@ -4,12 +4,18 @@
     "defaultBase": "develop"
   },
   "implicitDependencies": {
-    "nx.json": "*"
+    "nx.json": "*",
+    "tsconfig.json": "*",
+    ".foundryrc": "*",
+    "pnpm.lock.yaml": "*",
+    ".npmrc": "*",
+    ".nvmrc": "*"
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx-cloud",
       "options": {
+        "accessToken": "MDdkNmQwZWEtOGYwNy00ZjhkLWI5NGMtNjBiNGExY2Q5MzI2fHJlYWQ=",
         "cacheableOperations": [
           "lint",
           "build",
@@ -51,6 +57,9 @@
       "inputs": ["default", "testing", "^production"],
       "dependsOn": ["^build"]
     },
+    "generate": {
+      "dependsOn": ["^build"]
+    },
     "build:contracts": {
       "inputs": [
         "configsProject",
@@ -70,5 +79,6 @@
       "dependsOn": ["^build", "build:contracts"],
       "outputs": ["{projectRoot}/dist"]
     }
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }
