@@ -55,5 +55,6 @@ COPY --from=builder /app/op-batcher/bin/op-batcher /usr/local/bin/
 COPY --from=builder /app/op-proposer/bin/op-proposer /usr/local/bin/
 
 COPY --from=builder /app/op-node/scalind/entrypoint.sh /usr/local/entrypoints/op-node.sh
+COPY --from=builder /app/op-batcher/scalind/entrypoint.sh /usr/local/entrypoints/op-batcher.sh
 
 

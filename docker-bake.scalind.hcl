@@ -55,7 +55,7 @@ target "op-node" {
 }
 
 target "op-batcher" {
-  dockerfile = "Dockerfile"
+  dockerfile = "Dockerfile.scalind.cloud"
   context = "./op-batcher"
   args = {
     OP_STACK_GO_BUILDER = "op-stack-go"
