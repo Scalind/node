@@ -15,7 +15,7 @@ get_rollup_from_s3() {
     echo "Rollup file downloaded from S3"
 }
 
-ARGS="--sequencer.enabled --sequencer.l1-confs=5 --verifier.l1-confs=4 --rpc.addr=0.0.0.0 --rpc.port=8547 --p2p.disable --rpc.enable-admin"
+ARGS="--sequencer.enabled --sequencer.l1-confs=5 --verifier.l1-confs=4 --rpc.addr=0.0.0.0 --rpc.port=8547 --rpc.enable-admin"
 
 mkdir -p /configs
 
@@ -49,6 +49,14 @@ if [[ -n $SCALIND_SEQUENCER_PRIVATE_KEY ]]; then
 else
   echo "ERROR: Variable \"SCALIND_SEQUENCER_PRIVATE_KEY\" should be present"
   exit 1
+fi
+
+if [[ -n $SCALIND_P2P_NODES ]]; then
+  echo "INFO: P2P nodes env detected. Enabling P2P"
+  ARGS="--p2p.static=$SCALIND_P2P_NODES --p2p.listen.ip=0.0.0.0 --p2p.listen.tcp=9003 --p2p.listen.udp=9003"
+else
+  echo "INFO: P2P nodes not found. Disabling P2P"
+  ARGS=" --p2p.disable $ARGS"
 fi
 
 if [[ -n $SCALIND_L1_URL && -n $SCALIND_L1_KIND ]]; then
