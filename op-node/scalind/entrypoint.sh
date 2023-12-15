@@ -19,7 +19,7 @@ ARGS="--sequencer.enabled --sequencer.l1-confs=5 --verifier.l1-confs=4 --rpc.add
 
 mkdir -p /configs
 
-if [[ -n $SCALIND_S3_URL && -n $SCALIND_S3_ACCESS_KEY && -n $SCALIND_S3_SECRET_KEY && -n $SCALIND_S3_BUCKET && -n $SCALIND_S3_ROLLUP_FILE_PATH  ]]; then
+if [[ -n ${SCALIND_S3_URL} && -n ${SCALIND_S3_ACCESS_KEY} && -n ${SCALIND_S3_SECRET_KEY} && -n ${SCALIND_S3_BUCKET} && -n ${SCALIND_S3_ROLLUP_FILE_PATH}  ]]; then
   get_rollup_from_s3
 fi
 
@@ -30,7 +30,7 @@ else
   exit 1
 fi
 
-if [[ -n $SCALIND_L2_URL ]]; then
+if [[ -n ${SCALIND_L2_URL} ]]; then
   ARGS="--l2=$SCALIND_L2_URL $ARGS"
 else
   echo "ERROR: Variable \"SCALIND_L2_URL\" should be present"
@@ -44,22 +44,22 @@ else
   exit 1
 fi
 
-if [[ -n $SCALIND_SEQUENCER_PRIVATE_KEY ]]; then
+if [[ -n ${SCALIND_SEQUENCER_PRIVATE_KEY} ]]; then
   ARGS="--p2p.sequencer.key=$SCALIND_SEQUENCER_PRIVATE_KEY $ARGS"
 else
   echo "ERROR: Variable \"SCALIND_SEQUENCER_PRIVATE_KEY\" should be present"
   exit 1
 fi
 
-if [[ -n $SCALIND_P2P_NODES ]]; then
+if [[ ${SCALIND_P2P_NODES:+x} ]]; then
   echo "INFO: P2P nodes env detected. Enabling P2P"
-  ARGS="--p2p.static=$SCALIND_P2P_NODES --p2p.listen.ip=0.0.0.0 --p2p.listen.tcp=9003 --p2p.listen.udp=9003"
+  ARGS="--p2p.static=$SCALIND_P2P_NODES --p2p.listen.ip=0.0.0.0 --p2p.listen.tcp=9003 --p2p.listen.udp=9003 $ARGS"
 else
   echo "INFO: P2P nodes not found. Disabling P2P"
   ARGS=" --p2p.disable $ARGS"
 fi
 
-if [[ -n $SCALIND_L1_URL && -n $SCALIND_L1_KIND ]]; then
+if [[ -n ${SCALIND_L1_URL} && -n ${SCALIND_L1_KIND} ]]; then
   ARGS="--l1=$SCALIND_L1_URL --l1.rpckind=$SCALIND_L1_KIND $ARGS"
 else
   echo "ERROR: Variables \"SCALIND_L1_URL\" and \"SCALIND_L1_KIND\" should be present"
