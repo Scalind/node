@@ -1,6 +1,9 @@
 #!/bin/sh
 
-ARGS="--poll-interval=12s --rpc.port=8560"
+POLL_INTERVAL=${SCALIND_POLL_INTERVAL:-12s}
+NUM_CONFIRMATIONS=${SCALIND_NUM_CONFIRMATIONS:-10}
+
+ARGS="--poll-interval=${POLL_INTERVAL} --num-confirmations=${NUM_CONFIRMATIONS} --rpc.port=8560"
 
 if [[ ${SCALIND_L1_ETH_RPC:+x} ]]; then
   ARGS="--l1-eth-rpc=$SCALIND_L1_ETH_RPC $ARGS"

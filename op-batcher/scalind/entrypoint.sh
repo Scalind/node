@@ -1,6 +1,9 @@
 #!/bin/sh
 
-ARGS="--poll-interval=1s --sub-safety-margin=6 --num-confirmations=1 --safe-abort-nonce-too-low-count=3 --resubmission-timeout=30s --rpc.addr=0.0.0.0 --rpc.port=8548 --rpc.enable-admin --max-channel-duration=1"
+POLL_INTERVAL=${SCALIND_POLL_INTERVAL:-1s}
+NUM_CONFIRMATIONS=${SCALIND_NUM_CONFIRMATIONS:-1}
+
+ARGS="--poll-interval=${POLL_INTERVAL} --sub-safety-margin=6 --num-confirmations=${NUM_CONFIRMATIONS} --safe-abort-nonce-too-low-count=3 --resubmission-timeout=30s --rpc.addr=0.0.0.0 --rpc.port=8548 --rpc.enable-admin --max-channel-duration=1"
 
 if [[ ${SCALIND_L2_ETH_RPC:+x} ]]; then
   ARGS="--l2-eth-rpc=$SCALIND_L2_ETH_RPC $ARGS"
