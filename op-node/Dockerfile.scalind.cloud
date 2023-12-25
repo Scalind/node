@@ -1,0 +1,14 @@
+ARG OP_STACK_GO_BUILDER=us-docker.pkg.dev/oplabs-tools-artifacts/images/op-stack-go:latest
+FROM $OP_STACK_GO_BUILDER as builder
+# See "make golang-docker" and /ops/docker/op-stack-go
+
+FROM alpine:3.18
+
+RUN apk add --no-cache aws-cli
+
+COPY --from=builder /usr/local/bin/op-node /usr/local/bin/op-node
+COPY --from=builder /usr/local/entrypoints/op-node.sh /entrypoint.sh
+
+EXPOSE 8547
+
+ENTRYPOINT [ "/entrypoint.sh" ]
